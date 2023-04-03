@@ -14,7 +14,9 @@ Steps:
 
 /*-------------------------
 Issues:
-- inputing [book]:[larger number]-[smaller number] outputs until end of verse
+- inputing [book]:[larger number]-[smaller number] outputs until end of chapter
+- inputing a chapter number higher than exists will print that chapter from the first book to have that chapter number
+- inputing a verse number higher than exists will print that verse from the first chapter to have that verse number
 - Unknown behavior at the end of document (articles of faith whole chapter)
 - inputing verses that go beyond the bound into another book will produce issues if the current book is 1 chapter
     - add a field to struct that is the bound of book
@@ -26,7 +28,7 @@ Issues:
     - Potentially get rid of &
 - Have not handled if book does not exist
     - return 0 if the book isn't found in bibleBooks
-- Gen 1 doesn't print ever
+- Gen 1:1 doesn't print ever
 - comment on finished parts
     -potentially make clearer variables
 - Find new name for BibleBook and bibleBooks
@@ -51,7 +53,7 @@ typedef struct {
 } BibleBook;
 
 const BibleBook bibleBooks[] = {
-    {"Genesis", "Gen", "Gen", 1},
+    {"Genesis", "Gen", "Gen", 0},
     {"Exodus", "Ex", "Ex", 1534},
     {"Leviticus", "Lev", "Lev", 2747},
     {"Numbers", "Num", "Num", 3606},
@@ -175,7 +177,7 @@ void versePrint(char* book, char* chapter, char* verseStart, char* verseEnd){
     int line = bookLookUp(book);
 
     for(int i = 0; i<line; i++){
-        pinput = fgets(cmd_buff, 2000, file);
+        pinput = fgets(cmd_buff, 2000, file);printf("1\n");
     }
     printf("\n");
     if(strcmp(verseStart, "ALL")==0){
